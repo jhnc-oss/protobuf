@@ -848,6 +848,33 @@ void TextFormatConformanceTestSuiteImpl<MessageType>::RunAnyTests() {
           }
         }
         )");
+  RunValidTextFormatTest("AnyFieldWithCustomTypeUrlPrefix", REQUIRED,
+                         R"(
+        optional_any: {
+          [some.domain/sub-path_0/~!$&()*+,;=/protobuf_test_messages.proto3.TestAllTypesProto3]
+          {
+            optional_int32: 12345
+          }
+        }
+        )");
+  RunValidTextFormatTest(
+      "AnyFieldWithWhitespaceInTypeUrl", REQUIRED,
+      "optional_any: {\n"
+      "  [ ty pe.go\nogleap\tis.com/\n"
+      "    proto buf_te\nst_messages.proto3.Test\tAllTypesProto3 ]\n"
+      "  {\n"
+      "    optional_int32: 12345\n"
+      "  }\n"
+      "}");
+  RunValidTextFormatTest(
+      "AnyFieldWithCommentsInTypeUrl", REQUIRED,
+      "optional_any: {\n"
+      "  [type.google # comment \napis.com/"
+      "protobuf_test_messages.proto3.Test # comment \nAllTypesProto3]"
+      "  {\n"
+      "    optional_int32: 12345\n"
+      "  }\n"
+      "}");
 }
 
 template <typename MessageType>
