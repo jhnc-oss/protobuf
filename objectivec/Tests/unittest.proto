@@ -229,7 +229,7 @@ extend TestAllExtensions {
   optional TestAllTypes.NestedMessage
     optional_lazy_message_extension = 27 [lazy=true];
   optional TestAllTypes.NestedMessage
-    optional_unverified_lazy_message_extension = 28 [unverified_lazy=true];
+    optional_unverified_lazy_message_extension = 28;
 
   // Repeated
   repeated    int32 repeated_int32_extension    = 31;
