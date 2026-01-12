@@ -138,7 +138,7 @@ class SingularStringView : public FieldGeneratorBase {
 
   void GenerateMemberConstexprConstructor(io::Printer* p) const override {
     if (is_inlined()) {
-      p->Emit("$name$_(nullptr, false)");
+      p->Emit("$name$_{}");
     } else if (use_micro_string()) {
       if (EmptyDefault()) {
         p->Emit("$name$_{}");

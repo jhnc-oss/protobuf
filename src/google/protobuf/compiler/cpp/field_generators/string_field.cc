@@ -134,7 +134,7 @@ class SingularString : public FieldGeneratorBase {
 
   void GenerateMemberConstexprConstructor(io::Printer* p) const override {
     if (is_inlined()) {
-      p->Emit("$name$_(nullptr, false)");
+      p->Emit("$name$_{}");
     } else {
       p->Emit(
           "$name$_(\n"
