@@ -181,6 +181,12 @@ PyUpb_WeakMap* PyUpb_ObjCache_Instance(void) {
 }
 
 void PyUpb_ObjCache_Add(const void* key, PyObject* py_obj) {
+#if PY_VERSION_HEX >= 0x030D0000  // >= 3.13
+  /* Calling `PyUpb_WeakMap_Add` during interpreter shutdown causes a crash. */
+  if (Py_IsFinalizing()) {
+    return;
+  }
+#endif
   PyUpb_WeakMap_Add(PyUpb_ObjCache_Instance(), key, py_obj);
 }
 
